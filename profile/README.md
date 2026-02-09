@@ -64,7 +64,7 @@ graph TD
     Queue -.->|Persist/Sub| Redis
     Stream -.->|State| Redis
     Cron -.->|Locks| Redis
-    Log -.->|Store| Redis"
+    Log -.->|Store| Redis
 ```
 
 ## Worker Registry
@@ -102,7 +102,7 @@ sequenceDiagram
     E->>+W: Invoke 'api.echo' (Payload)
     W-->>-E: InvocationResult (JSON)
     E-->>-API: Response Body
-    API-->>-C: HTTP 200 OK"
+    API-->>-C: HTTP 200 OK
 ```
 
 ### Queue Publishing
@@ -120,7 +120,7 @@ sequenceDiagram
 
     R->>E: Notify Subscribers
     E->>W2: Invoke Handler (queue trigger)
-    W2-->>E: Processing Complete"
+    W2-->>E: Processing Complete
 ```
 
 ## Module Architecture
@@ -168,7 +168,7 @@ graph LR
     Client[Client] -->|HTTP| Engine[Engine]
     Engine -->|Invoke| Worker[Worker]
     Worker -->|Result| Engine
-    Engine -->|Response| Client"
+    Engine -->|Response| Client
 ```
 
 ### Asynchronous Pattern (Queues)
@@ -179,7 +179,7 @@ graph TD
     Engine -->|Store| Redis[(Redis)]
     Redis -.->|Notify| Engine
     Engine -->|Invoke| Sub1[Subscriber 1]
-    Engine -->|Invoke| Sub2[Subscriber 2]"
+    Engine -->|Invoke| Sub2[Subscriber 2]
 ```
 
 ### Scheduled Pattern (Cron)
@@ -189,7 +189,7 @@ graph TD
     Scheduler[Cron Scheduler] -->|Tick| Lock{Acquire Lock?}
     Lock -->|Success| Execute[Execute Function]
     Lock -->|Fail| Skip[Skip Execution]
-    Execute -->|Complete| Release[Release Lock]"
+    Execute -->|Complete| Release[Release Lock]
 ```
 
 ## Scalability Considerations
