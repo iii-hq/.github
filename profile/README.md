@@ -24,17 +24,17 @@ The iii architecture consists of three main layers:
 
 ```mermaid
 graph TD
-    subgraph &#x22;External World&#x22;
+    subgraph External World
         Client[HTTP Client]
         Redis[(Redis)]
         User[WebSocket<br/>User]
     end
 
-    subgraph &#x22;iii Engine Process&#x22;
+    subgraph iii Engine Process
         Core[Engine Core]
         Reg[Worker<br/>Registry]
 
-        subgraph &#x22;Core Modules&#x22;
+        subgraph Core Modules
             API[RestApiModule]
             Stream[StreamModule]
             Log[LoggingModule]
@@ -43,7 +43,7 @@ graph TD
         end
     end
 
-    subgraph &#x22;Worker Processes&#x22;
+    subgraph Worker Processes
         W1[Node.js<br/>Worker]
         W2[Python<br/>Worker]
     end
