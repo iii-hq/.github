@@ -1,14 +1,12 @@
 # Welcome to iii
 
+**iii** (pronounced "three eye") is a backend engine that unifies your entire infrastructure — APIs, background jobs, workflows, queues, state, and everything else — into a single, durable runtime.
 
+The engine model creates a "Modular Monolith" that scales like microservices but removes their architectural complexity, making your application feel and behave like a cohesive whole no matter where it is running.
 
-**iii** (pronounced "three eye") is a backend engine that unifies your entire infrastructure—APIs, background jobs, workflows, queues, state, and everything else—into a single, durable runtime.
+It creates this experience by transforming every backend operation into three primitives: **Worker**, **Function**, and **Trigger**. These primitives are the mechanism by which most architectural complexity is removed.
 
-The engine model creates a "Modular Monolith" that scales like microservices but removes their architectural complexity which makes your application feel and behave like a cohesive whole no matter where it is running.
-
-It creates this experience by transforming every backend operation into two core concepts: Call and Register. These concepts are the mechanism by which most architectural complexity is removed.
-
-> React revolutionized the frontend with the Component and Context. Rust revolutionized systems programming with Ownership and Borrowing. iii hopes to do the same on the backend with Call and Register.
+> React revolutionized the frontend with the Component and Context. Rust revolutionized systems programming with Ownership and Borrowing. iii hopes to do the same on the backend with Worker, Function, and Trigger.
 
 # Architecture Overview
 
@@ -35,7 +33,7 @@ graph TD
         Reg[Worker<br/>Registry]
 
         subgraph Core Modules
-            API[RestApiModule]
+            API[HTTP Module]
             Stream[StreamModule]
             Log[LoggingModule]
             Queue[QueueModule]
@@ -85,7 +83,7 @@ The Worker Registry tracks connected workers and their registered functions:
 ```mermaid
 sequenceDiagram
     participant C as Client
-    participant API as RestAPI
+    participant API as HTTP Module
     participant E as Engine
     participant W as Worker
 
@@ -127,7 +125,7 @@ sequenceDiagram
 
 Core Modules implement the `CoreModule` trait and bridge external protocols to internal function calls.
 
-### REST API Module
+### HTTP Module
 
 Maps HTTP routes to internal function paths using a hot router:
 
@@ -156,7 +154,7 @@ Implements publish-subscribe pattern:
 Handles distributed scheduling:
 
 * **Cron Parser**: Supports standard cron expressions
-* **Distributed Locks**: Prqueues duplicate execution across instances
+* **Distributed Locks**: Prevents duplicate execution across instances
 * **Job Management**: Tokio-based task scheduling
 
 ## Data Flow Patterns
